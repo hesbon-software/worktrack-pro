@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { auth } from './firebase'; // Or './firebase' depending on your file structure
-import Login from './pages/Login';
+import { auth } from 'r./firebase'; // Or './firebase' depending on your file structure
+import Login from './pages/login';
 
 export default function App() {
   const [user, setUser] = useState(null);
