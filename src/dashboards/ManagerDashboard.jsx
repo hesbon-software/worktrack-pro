@@ -1,29 +1,25 @@
 import React from 'react';
 
-export default function ManagerDashboard() {
+export default function EmployeeDashboard() {
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
-          <h2 className="text-xl font-bold mb-2">Team Attendance</h2>
-          <p className="text-3xl font-extrabold text-emerald-400 mt-2">12 / 14</p>
-          <p className="text-sm text-slate-400 mt-1">Active team members online today</p>
-        </div>
+    <div style={{ color: '#fff' }}>
+      <div style={{ backgroundColor: '#0f172a', padding: '1.5rem', borderRadius: '0.75rem', border: '1px solid #1e293b', marginBottom: '1.5rem' }}>
+        <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#10b981', margin: '0 0 0.5rem 0' }}>Employee Workspace</h2>
+        <p style={{ color: '#94a3b8', fontSize: '0.9rem', margin: 0 }}>Welcome back! Track your daily tasks, submit reports, and manage your shifts here.</p>
+      </div>
 
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
-          <h2 className="text-xl font-bold mb-2">Leave Approvals</h2>
-          <div className="mt-3 space-y-3">
-            <div className="flex justify-between items-center bg-slate-900 p-3 rounded-lg border border-slate-700 text-sm">
-              <span>Jane Smith (Sick Leave)</span>
-              <div className="space-x-2">
-                <button className="bg-emerald-600 px-3 py-1 rounded text-xs font-bold hover:bg-emerald-500">Approve</button>
-                <button className="bg-red-600 px-3 py-1 rounded text-xs font-bold hover:bg-red-500">Reject</button>
-              </div>
-            </div>
-          </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+        <div style={{ backgroundColor: '#0f172a', padding: '1.5rem', borderRadius: '0.75rem', border: '1px solid #1e293b' }}>
+          <h3 style={{ fontSize: '1rem', color: '#38bdf8', marginBottom: '0.5rem' }}>My Assigned Tasks</h3>
+          <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>No pending tasks for today.</p>
+        </div>
+        <div style={{ backgroundColor: '#0f172a', padding: '1.5rem', borderRadius: '0.75rem', border: '1px solid #1e293b' }}>
+          <h3 style={{ fontSize: '1rem', color: '#38bdf8', marginBottom: '0.5rem' }}>Time Tracking</h3>
+          <button style={{ backgroundColor: '#10b981', color: '#fff', border: 'none', padding: '0.5rem 1rem', borderRadius: '0.5rem', fontWeight: 'bold', cursor: 'pointer', marginTop: '0.5rem' }}>
+            Clock In
+          </button>
         </div>
       </div>
     </div>
   );
 }
-

@@ -2,19 +2,20 @@ import React from 'react';
 
 export default function EmployerDashboard() {
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
-          <p className="text-sm text-slate-400">Total Workforce</p>
-          <h2 className="text-3xl font-extrabold mt-1">48</h2>
+    <div style={{ color: '#fff' }}>
+      <div style={{ backgroundColor: '#0f172a', padding: '1.5rem', borderRadius: '0.75rem', border: '1px solid #1e293b', marginBottom: '1.5rem' }}>
+        <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#9333ea', margin: '0 0 0.5rem 0' }}>Employer Executive Suite</h2>
+        <p style={{ color: '#94a3b8', fontSize: '0.9rem', margin: 0 }}>Global company analytics, financial tracking, and organization settings.</p>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+        <div style={{ backgroundColor: '#0f172a', padding: '1.5rem', borderRadius: '0.75rem', border: '1px solid #1e293b' }}>
+          <h3 style={{ fontSize: '1rem', color: '#38bdf8', marginBottom: '0.5rem' }}>Company Overview</h3>
+          <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>WorkTrack Pro - Enterprise Edition Active</p>
         </div>
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
-          <p className="text-sm text-slate-400">Monthly Payroll Estimate</p>
-          <h2 className="text-3xl font-extrabold text-emerald-400 mt-1">$64,200</h2>
-        </div>
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
-          <p className="text-sm text-slate-400">Overall Productivity</p>
-          <h2 className="text-3xl font-extrabold text-sky-400 mt-1">94%</h2>
+        <div style={{ backgroundColor: '#0f172a', padding: '1.5rem', borderRadius: '0.75rem', border: '1px solid #1e293b' }}>
+          <h3 style={{ fontSize: '1rem', color: '#38bdf8', marginBottom: '0.5rem' }}>User Management</h3>
+          <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>Manage employee access permissions.</p>
         </div>
       </div>
     </div>
