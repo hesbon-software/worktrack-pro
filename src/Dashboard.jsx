@@ -36,25 +36,25 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', backgroundColor: 'transparent', color: '#f8fafc', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: 'sans-serif' }}>
-        <p>Loading your secure workspace...</p>
+      <div style={{ minHeight: '80vh', color: '#f8fafc', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: 'sans-serif' }}>
+        <p>Loading workspace...</p>
       </div>
     );
   }
 
   return (
-    <div style={{ minHeight: '90vh', color: '#f8fafc', padding: '1.5rem', fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+    <div style={{ minHeight: '90vh', padding: '1.5rem', fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
       <div>
         {/* Top Header */}
-        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1.5rem', marginBottom: '2rem', borderBottom: '1px solid rgba(30, 41, 59, 0.8)', flexWrap: 'wrap', gap: '1rem' }}>
+        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1.25rem', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255, 255, 255, 0.1)', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', margin: 0, textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>WorkTrack Pro Dashboard</h1>
-            <p style={{ fontSize: '0.75rem', color: '#22d3ee', fontWeight: 'bold', textTransform: 'uppercase', margin: '0.25rem 0 0 0' }}>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', margin: 0, color: '#ffffff' }}>WorkTrack Pro Dashboard</h1>
+            <p style={{ fontSize: '0.75rem', color: '#38bdf8', fontWeight: 'bold', textTransform: 'uppercase', margin: '0.25rem 0 0 0' }}>
               POWERED BY HESBON SOFTWARE DESIGNER
             </p>
           </div>
           
-          <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.85)', backdropFilter: 'blur(6px)', padding: '0.5rem 1rem', borderRadius: '0.5rem', border: '1px solid rgba(30, 41, 59, 0.8)', fontSize: '0.85rem', color: '#38bdf8' }}>
+          <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', padding: '0.5rem 1rem', borderRadius: '0.5rem', fontSize: '0.85rem', color: '#38bdf8' }}>
             Role: <strong style={{ textTransform: 'capitalize' }}>{userRole}</strong>
           </div>
         </header>
@@ -67,17 +67,17 @@ export default function Dashboard() {
         </main>
       </div>
 
-      {/* Formal Software License Footer (Displayed Down Here) */}
-      <footer style={{ marginTop: '3rem', padding: '1.5rem', backgroundColor: 'rgba(15, 23, 42, 0.9)', backdropFilter: 'blur(8px)', borderTop: '1px solid rgba(51, 65, 85, 0.8)', borderRadius: '0.75rem', fontSize: '0.75rem', color: '#94a3b8', lineHeight: '1.5' }}>
-        <p style={{ color: '#f8fafc', fontWeight: 'bold', marginBottom: '0.5rem' }}>📜 SOFTWARE END-USER LICENSE & TERMS OF SERVICE</p>
-        <p style={{ margin: '0.25rem 0' }}><strong>Developer:</strong> Hesbon Software Designer | <strong>Platform:</strong> WorkTrack Pro Enterprise Suite</p>
-        <p style={{ margin: '0.25rem 0' }}>
+      {/* Software License Footer */}
+      <footer style={{ marginTop: '3rem', padding: '1.25rem 1.5rem', backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '0.75rem', fontSize: '0.75rem', color: '#94a3b8', lineHeight: '1.5' }}>
+        <p style={{ color: '#f8fafc', fontWeight: 'bold', marginBottom: '0.4rem' }}>📜 SOFTWARE END-USER LICENSE & TERMS OF SERVICE</p>
+        <p style={{ margin: '0.2rem 0' }}><strong>Developer:</strong> Hesbon Software Designer | <strong>Platform:</strong> WorkTrack Pro Enterprise Suite</p>
+        <p style={{ margin: '0.2rem 0' }}>
           1. <strong>License Grant:</strong> This software is licensed, not sold. Unauthorized reverse engineering, redistribution, or modification of source files is prohibited.
         </p>
-        <p style={{ margin: '0.25rem 0' }}>
+        <p style={{ margin: '0.2rem 0' }}>
           2. <strong>Security & Access:</strong> Access to employee, manager, and employer dashboards is strictly gated via Firebase Authentication and Firestore role permissions.
         </p>
-        <p style={{ margin: '0.25rem 0' }}>
+        <p style={{ margin: '0.2rem 0' }}>
           3. <strong>Disclaimer:</strong> Provided "AS IS" without warranties of any kind. All data logs and shift reports are securely managed under organization privacy standards.
         </p>
       </footer>

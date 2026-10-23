@@ -34,39 +34,16 @@ export default function Auth() {
 
   if (user) {
     return (
-      <div style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
-        {/* Colorful Virtual Background Video */}
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            objectFit: 'cover',
-            zIndex: -1,
-            filter: 'brightness(0.35) saturate(1.4)'
-          }}
-        >
-          {/* Stunning colorful abstract technology loop video */}
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-with-code-and-graphs-31910-large.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-
-        {/* Top Navbar Header (Email Removed) */}
+      <div className="animated-bg" style={{ minHeight: '100vh', color: '#f8fafc' }}>
+        {/* Top Header - No Email, Just Sign Out */}
         <div 
           style={{ 
             display: 'flex', 
-            justifyContent: 'flex-end', 
+            justify: 'flex-end', 
             alignItems: 'center', 
             padding: '0.8rem 1.5rem', 
-            backgroundColor: 'rgba(15, 23, 42, 0.85)', 
-            backdropFilter: 'blur(8px)',
-            borderBottom: '1px solid rgba(30, 41, 59, 0.8)'
+            backgroundColor: 'rgba(15, 23, 42, 0.95)', 
+            borderBottom: '1px solid #1e293b'
           }}
         >
           <button 
@@ -75,47 +52,28 @@ export default function Auth() {
               backgroundColor: '#ef4444', 
               color: '#ffffff', 
               border: 'none', 
-              padding: '0.4rem 1rem', 
+              padding: '0.45rem 1.1rem', 
               borderRadius: '0.375rem', 
               cursor: 'pointer', 
               fontWeight: '600', 
-              fontSize: '0.8rem'
+              fontSize: '0.85rem'
             }}
           >
             Sign Out
           </button>
         </div>
 
-        {/* Dashboard View */}
+        {/* Main Dashboard */}
         <Dashboard />
       </div>
     );
   }
 
-  // Login / Signup Screen with Background Video
+  // Auth Screen
   return (
-    <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '1rem' }}>
-      <video 
-        autoPlay 
-        loop 
-        muted 
-        playsInline 
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          objectFit: 'cover',
-          zIndex: -1,
-          filter: 'brightness(0.35) saturate(1.4)'
-        }}
-      >
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-with-code-and-graphs-31910-large.mp4" type="video/mp4" />
-      </video>
-
-      <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.85)', backdropFilter: 'blur(10px)', border: '1px solid rgba(51, 65, 85, 0.8)', padding: '2rem', borderRadius: '0.75rem', width: '100%', maxWidth: '400px', color: '#f8fafc', boxShadow: '0 8px 32px rgba(0,0,0,0.5)' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '0.5rem', color: '#38bdf8' }}>WorkTrack Pro</h2>
+    <div className="animated-bg" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '1rem' }}>
+      <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', padding: '2rem', borderRadius: '0.75rem', width: '100%', maxWidth: '400px', color: '#f8fafc', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }}>
+        <h2 style={{ textAlign: 'center', marginBottom: '0.25rem', color: '#38bdf8' }}>WorkTrack Pro</h2>
         <p style={{ textAlign: 'center', fontSize: '0.75rem', color: '#22d3ee', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
           Hesbon Software Designer
         </p>
@@ -130,7 +88,7 @@ export default function Auth() {
               required 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
-              style={{ width: '100%', padding: '0.6rem', borderRadius: '0.375rem', backgroundColor: 'rgba(30, 41, 59, 0.8)', border: '1px solid #334155', color: '#fff', boxSizing: 'border-box' }} 
+              style={{ width: '100%', padding: '0.6rem', borderRadius: '0.375rem', backgroundColor: '#1e293b', border: '1px solid #334155', color: '#fff', boxSizing: 'border-box' }} 
             />
           </div>
           <div>
@@ -140,7 +98,7 @@ export default function Auth() {
               required 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
-              style={{ width: '100%', padding: '0.6rem', borderRadius: '0.375rem', backgroundColor: 'rgba(30, 41, 59, 0.8)', border: '1px solid #334155', color: '#fff', boxSizing: 'border-box' }} 
+              style={{ width: '100%', padding: '0.6rem', borderRadius: '0.375rem', backgroundColor: '#1e293b', border: '1px solid #334155', color: '#fff', boxSizing: 'border-box' }} 
             />
           </div>
           <button 
