@@ -3,7 +3,7 @@ import {
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword 
 } from 'firebase/auth';
-import { auth } from './firebaseConfig'; // Your Firebase auth instance
+import { auth } from './firebase.js'; // Your Firebase auth instance
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false); // Toggle between Login and Sign-Up
