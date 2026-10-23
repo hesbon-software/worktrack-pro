@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import Dashboard from './Dashboard';
+import { auth } from './firebase';
 import { 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, 
   onAuthStateChanged, 
   signOut 
 } from 'firebase/auth';
-import { auth } from './firebase';
+import Dashboard from './Dashboard';
 
 export default function Auth() {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isRegistering, setIsRegistering] = useState(false);
+  const [isSigningUp, setIsSigningUp] = useState(false);
   const [error, setError] = useState('');
 
-  // Listen for Firebase authentication state changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -23,12 +22,11 @@ export default function Auth() {
     return () => unsubscribe();
   }, []);
 
-  // Handle Login / Registration
   const handleAuth = async (e) => {
     e.preventDefault();
     setError('');
     try {
-      if (isRegistering) {
+      if (isSigningUp) {
         await createUserWithEmailAndPassword(auth, email, password);
       } else {
         await signInWithEmailAndPassword(auth, email, password);
@@ -42,68 +40,60 @@ export default function Auth() {
     await signOut(auth);
   };
 
-  // IF USER IS LOGGED IN: Show your multi-role Dashboard (Employee, Manager, Employer)
   if (user) {
     return (
       <div>
-        <button 
-          onClick={handleLogout}
-          style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 1000, background: '#ef4444', color: '#fff', border: 'none', padding: '0.5rem 1rem', borderRadius: '0.5rem', cursor: 'pointer', fontWeight: 'bold' }}
-        >
-          Sign Out ({user.email})
-        </button>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '1rem', backgroundColor: '#020617', borderBottom: '1px solid #1e293b' }}>
+          <button 
+            onClick={handleLogout}
+            style={{ backgroundColor: '#ef4444', color: '#fff', border: 'none', padding: '0.4rem 0.8rem', borderRadius: '0.4rem', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem' }}
+          >
+            Sign Out ({user.email})
+          </button>
+        </div>
         <Dashboard />
       </div>
     );
   }
 
-  // IF NOT LOGGED IN: Show Login / Register Form
   return (
-    <div style={{ backgroundColor: '#0b1120', color: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', fontFamily: 'sans-serif', padding: '1rem' }}>
-      <div style={{ width: '100%', maxWidth: '400px', backgroundColor: '#131c31', padding: '2rem', borderRadius: '0.75rem', border: '1px solid #1e293b', boxShadow: '0 4px 6px rgba(0,0,0,0.3)' }}>
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.5rem', textAlign: 'center' }}>WorkTrack Pro</h1>
-        <p style={{ color: '#94a3b8', fontSize: '0.85rem', textAlign: 'center', marginBottom: '1.5rem' }}>POWERED BY HESBON SOFTWARE DESIGNER</p>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#020617', color: '#fff', fontFamily: 'sans-serif', padding: '1rem' }}>
+      <form onSubmit={handleAuth} style={{ backgroundColor: '#0f172a', padding: '2rem', borderRadius: '0.75rem', border: '1px solid #1e293b', width: '100%', maxWidth: '400px' }}>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.25rem' }}>WorkTrack Pro</h2>
+        <p style={{ color: '#22d3ee', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '1.5rem' }}>Powered by Hesbon Software Designer</p>
 
-        {error && <p style={{ backgroundColor: '#7f1d1d', color: '#fca5a5', padding: '0.75rem', borderRadius: '0.5rem', fontSize: '0.85rem', marginBottom: '1rem' }}>{error}</p>}
+        {error && <div style={{ color: '#f87171', backgroundColor: '#450a0a', padding: '0.5rem', borderRadius: '0.375rem', marginBottom: '1rem', fontSize: '0.85rem' }}>{error}</div>}
 
-        <form onSubmit={handleAuth} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div>
-            <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.25rem' }}>Email Address</label>
-            <input 
-              type="email" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
-              required 
-              style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', backgroundColor: '#0f172a', border: '1px solid #334155', color: '#fff', boxSizing: 'border-box' }}
-            />
-          </div>
+        <div style={{ marginBottom: '1rem' }}>
+          <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.25rem' }}>Email</label>
+          <input 
+            type="email" 
+            required 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+            style={{ width: '100%', padding: '0.5rem', borderRadius: '0.375rem', backgroundColor: '#1e293b', border: '1px solid #334155', color: '#fff', boxSizing: 'border-box' }}
+          />
+        </div>
 
-          <div>
-            <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.25rem' }}>Password</label>
-            <input 
-              type="password" 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-              required 
-              style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', backgroundColor: '#0f172a', border: '1px solid #334155', color: '#fff', boxSizing: 'border-box' }}
-            />
-          </div>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.25rem' }}>Password</label>
+          <input 
+            type="password" 
+            required 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+            style={{ width: '100%', padding: '0.5rem', borderRadius: '0.375rem', backgroundColor: '#1e293b', border: '1px solid #334155', color: '#fff', boxSizing: 'border-box' }}
+          />
+        </div>
 
-          <button 
-            type="submit" 
-            style={{ backgroundColor: '#10b981', color: '#fff', border: 'none', padding: '0.75rem', borderRadius: '0.5rem', fontWeight: 'bold', cursor: 'pointer', marginTop: '0.5rem' }}
-          >
-            {isRegistering ? 'Create Account' : 'Sign In'}
-          </button>
-        </form>
-
-        <button 
-          onClick={() => setIsRegistering(!isRegistering)} 
-          style={{ background: 'none', border: 'none', color: '#38bdf8', width: '100%', textAlign: 'center', marginTop: '1.25rem', cursor: 'pointer', fontSize: '0.85rem' }}
-        >
-          {isRegistering ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
+        <button type="submit" style={{ width: '100%', backgroundColor: '#2563eb', color: '#fff', border: 'none', padding: '0.6rem', borderRadius: '0.375rem', fontWeight: 'bold', cursor: 'pointer', marginBottom: '1rem' }}>
+          {isSigningUp ? 'Sign Up' : 'Log In'}
         </button>
-      </div>
+
+        <p style={{ textAlign: 'center', fontSize: '0.85rem', color: '#94a3b8', margin: 0, cursor: 'pointer' }} onClick={() => setIsSigningUp(!isSigningUp)}>
+          {isSigningUp ? 'Already have an account? Log In' : "Don't have an account? Sign Up"}
+        </p>
+      </form>
     </div>
   );
 }
