@@ -1,124 +1,113 @@
-import React, { useState } from 'react';
-import { auth } from './firebase';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
-import Dashboard from './Dashboard';
+import React from 'react';
 
-export default function Auth() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isRegistering, setIsRegistering] = useState(false);
-  const [user, setUser] = useState(auth.currentUser);
-  const [error, setError] = useState('');
+export default function ManagerPayrollView() {
+  const payrollRecords = [
+    { name: 'Hesbon Ndemo', department: 'IT', salary: '80,000', status: 'Paid', date: '20 Oct 2026' },
+    { name: 'Mary Wanjiku', department: 'Design', salary: '70,000', status: 'Paid', date: '20 Oct 2026' },
+    { name: 'John Kamau', department: 'Development', salary: '75,000', status: 'Pending', date: '-' },
+    { name: 'Aisha Njeri', department: 'HR', salary: '60,000', status: 'Paid', date: '18 Oct 2026' },
+  ];
 
-  auth.onAuthStateChanged((u) => {
-    setUser(u);
-  });
+  return (
+    <div style={{ padding: '1.5rem', backgroundColor: '#f8fafc', minHeight: 'calc(100vh - 70px)', boxSizing: 'border-box' }}>
+      
+      {/* Header Banner */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+        <div>
+          <h2 style={{ fontSize: '1.25rem', color: '#0f172a', fontWeight: 'bold', margin: '0 0 0.25rem 0' }}>Payroll Management</h2>
+          <p style={{ color: '#64748b', fontSize: '0.85rem', margin: 0 }}>Manage salaries, payments and payroll records.</p>
+        </div>
+        <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 'bold' }}>📅 Thu, 23 Oct 2026</div>
+      </div>
 
-  const handleAuth = async (e) => {
-    e.preventDefault();
-    setError('');
-    try {
-      if (isRegistering) {
-        await createUserWithEmailAndPassword(auth, email, password);
-      } else {
-        await signInWithEmailAndPassword(auth, email, password);
-      }
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  const handleLogout = async () => {
-    await signOut(auth);
-  };
-
-  if (user) {
-    return (
-      <div className="animated-bg" style={{ minHeight: '100vh', color: '#f8fafc' }}>
-        {/* Top Header - No Email, Just Sign Out */}
-        <div 
-          style={{ 
-            display: 'flex', 
-            justify: 'flex-end', 
-            alignItems: 'center', 
-            padding: '0.8rem 1.5rem', 
-            backgroundColor: 'rgba(15, 23, 42, 0.95)', 
-            borderBottom: '1px solid #1e293b'
-          }}
-        >
-          <button 
-            onClick={handleLogout}
-            style={{ 
-              backgroundColor: '#ef4444', 
-              color: '#ffffff', 
-              border: 'none', 
-              padding: '0.45rem 1.1rem', 
-              borderRadius: '0.375rem', 
-              cursor: 'pointer', 
-              fontWeight: '600', 
-              fontSize: '0.85rem'
-            }}
-          >
-            Sign Out
-          </button>
+      {/* KPI Salary Cards */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
+        
+        <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '0.75rem', padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ backgroundColor: '#dbeafe', color: '#2563eb', padding: '0.75rem', borderRadius: '50%', fontSize: '1.25rem' }}>📊</div>
+          <div>
+            <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Total Employees</div>
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#0f172a' }}>18</div>
+          </div>
         </div>
 
-        {/* Main Dashboard */}
-        <Dashboard />
-      </div>
-    );
-  }
-
-  // Auth Screen
-  return (
-    <div className="animated-bg" style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '1rem' }}>
-      <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', padding: '2rem', borderRadius: '0.75rem', width: '100%', maxWidth: '400px', color: '#f8fafc', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '0.25rem', color: '#38bdf8' }}>WorkTrack Pro</h2>
-        <p style={{ textAlign: 'center', fontSize: '0.75rem', color: '#22d3ee', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
-          Hesbon Software Designer
-        </p>
-
-        {error && <p style={{ color: '#ef4444', fontSize: '0.8rem', marginBottom: '1rem', textAlign: 'center' }}>{error}</p>}
-
-        <form onSubmit={handleAuth} style={{ display: 'grid', gap: '1rem' }}>
+        <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '0.75rem', padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ backgroundColor: '#dcfce7', color: '#16a34a', padding: '0.75rem', borderRadius: '50%', fontSize: '1.25rem' }}>💵</div>
           <div>
-            <label style={{ fontSize: '0.8rem', color: '#94a3b8', display: 'block', marginBottom: '0.3rem' }}>Email Address</label>
-            <input 
-              type="email" 
-              required 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
-              style={{ width: '100%', padding: '0.6rem', borderRadius: '0.375rem', backgroundColor: '#1e293b', border: '1px solid #334155', color: '#fff', boxSizing: 'border-box' }} 
-            />
+            <div style={{ fontSize: '0.75rem', color: '#64748b' }}>This Month's Payroll</div>
+            <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#16a34a' }}>KSh 1,280,000</div>
           </div>
-          <div>
-            <label style={{ fontSize: '0.8rem', color: '#94a3b8', display: 'block', marginBottom: '0.3rem' }}>Password</label>
-            <input 
-              type="password" 
-              required 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-              style={{ width: '100%', padding: '0.6rem', borderRadius: '0.375rem', backgroundColor: '#1e293b', border: '1px solid #334155', color: '#fff', boxSizing: 'border-box' }} 
-            />
-          </div>
-          <button 
-            type="submit" 
-            style={{ backgroundColor: '#2563eb', color: '#fff', border: 'none', padding: '0.75rem', borderRadius: '0.375rem', fontWeight: 'bold', cursor: 'pointer', marginTop: '0.5rem' }}
-          >
-            {isRegistering ? 'Sign Up' : 'Sign In'}
-          </button>
-        </form>
+        </div>
 
-        <p style={{ textAlign: 'center', fontSize: '0.8rem', marginTop: '1.25rem', color: '#94a3b8' }}>
-          {isRegistering ? 'Already have an account?' : "Don't have an account?"}{' '}
-          <span 
-            onClick={() => setIsRegistering(!isRegistering)} 
-            style={{ color: '#38bdf8', cursor: 'pointer', fontWeight: 'bold' }}
-          >
-            {isRegistering ? 'Sign In' : 'Sign Up'}
-          </span>
-        </p>
+        <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '0.75rem', padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ backgroundColor: '#dcfce7', color: '#16a34a', padding: '0.75rem', borderRadius: '50%', fontSize: '1.25rem' }}>✓</div>
+          <div>
+            <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Paid</div>
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#0f172a' }}>12</div>
+          </div>
+        </div>
+
+        <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '0.75rem', padding: '1.25rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ backgroundColor: '#fef3c7', color: '#d97706', padding: '0.75rem', borderRadius: '50%', fontSize: '1.25rem' }}>⌛</div>
+          <div>
+            <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Pending</div>
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#0f172a' }}>6</div>
+          </div>
+        </div>
+
       </div>
+
+      {/* Table Section */}
+      <div style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '0.75rem', padding: '1.25rem' }}>
+        
+        {/* Navigation Tabs */}
+        <div style={{ display: 'flex', gap: '1.5rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '0.75rem', marginBottom: '1.25rem' }}>
+          <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: '#2563eb', borderBottom: '2px solid #2563eb', paddingBottom: '0.75rem', cursor: 'pointer' }}>Payment Records</span>
+          <span style={{ fontSize: '0.85rem', color: '#64748b', cursor: 'pointer' }}>Salary Due</span>
+          <span style={{ fontSize: '0.85rem', color: '#64748b', cursor: 'pointer' }}>Payment History</span>
+        </div>
+
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.8rem' }}>
+            <thead>
+              <tr style={{ borderBottom: '1px solid #e2e8f0', color: '#64748b' }}>
+                <th style={{ padding: '0.65rem 0' }}>Employee</th>
+                <th style={{ padding: '0.65rem 0' }}>Department</th>
+                <th style={{ padding: '0.65rem 0' }}>Salary (KSh)</th>
+                <th style={{ padding: '0.65rem 0' }}>Status</th>
+                <th style={{ padding: '0.65rem 0' }}>Payment Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {payrollRecords.map((rec, idx) => (
+                <tr key={idx} style={{ borderBottom: '1px solid #f1f5f9', color: '#1e293b' }}>
+                  <td style={{ padding: '0.65rem 0', fontWeight: '600' }}>{rec.name}</td>
+                  <td style={{ padding: '0.65rem 0', color: '#64748b' }}>{rec.department}</td>
+                  <td style={{ padding: '0.65rem 0', fontWeight: 'bold' }}>{rec.salary}</td>
+                  <td style={{ padding: '0.65rem 0' }}>
+                    <span style={{
+                      padding: '0.15rem 0.45rem',
+                      borderRadius: '0.25rem',
+                      fontSize: '0.7rem',
+                      fontWeight: 'bold',
+                      backgroundColor: rec.status === 'Paid' ? '#dcfce7' : '#fef3c7',
+                      color: rec.status === 'Paid' ? '#16a34a' : '#d97706'
+                    }}>
+                      {rec.status}
+                    </span>
+                  </td>
+                  <td style={{ padding: '0.65rem 0', color: '#64748b' }}>{rec.date}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <button style={{ backgroundColor: '#2563eb', color: '#fff', border: 'none', padding: '0.65rem 1.25rem', borderRadius: '0.375rem', fontWeight: 'bold', fontSize: '0.8rem', cursor: 'pointer', marginTop: '1.25rem', float: 'right' }}>
+          Generate Payroll Report
+        </button>
+      </div>
+
     </div>
   );
 }
